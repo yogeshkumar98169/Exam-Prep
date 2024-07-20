@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import service from '../appwrite/services';
 import config from '../appwrite/config';
+import { MdDelete } from "react-icons/md";
 
 export default function Idioms() {
   const [title,setTitle]=useState("");
@@ -36,21 +37,40 @@ export default function Idioms() {
     getAll();
   })
   return (
-    <div className='flex flex-col gap-3'>
-      <h1 className="text-2xl font-serif font-bold my-3 text-center">Idioms and Phrases</h1>
-      <main className='flex flex-col gap-3'>
-        <div className='flex flex-col gap-2'>
-          <input type="text" onChange={handleChange} value={title} className='p-2 outline-none rounded-lg w-72 max-w-72'/>
-          <button onClick={handleClick} className='p-2 bg-blue-600 rounded-lg text-[rgb(225,219,219)]'> {send ? "Save" : "Saving..."}</button>
+    <div className="flex flex-col gap-3">
+      <h1 className="text-2xl font-serif font-bold my-3 text-center">
+        Idioms and Phrases
+      </h1>
+      <main className="flex flex-col gap-3">
+        <div className="flex flex-col gap-2">
+          <input
+            type="text"
+            onChange={handleChange}
+            value={title}
+            className="p-2 outline-none rounded-lg w-72 max-w-72"
+          />
+          <button
+            onClick={handleClick}
+            className="p-2 bg-blue-600 rounded-lg text-[rgb(225,219,219)]"
+          >
+            {" "}
+            {send ? "Save" : "Saving..."}
+          </button>
         </div>
 
-        <div className='bg-[#6c6b6b] flex flex-col gap-3 p-2 rounded-sm'>
+        <div className="bg-[#6c6b6b] flex flex-col gap-3 p-2 rounded-sm">
           {allPosts
             ? allPosts.map((e) => (
-                <div key={e.$id} id={e.$id} className='bg-white rounded-lg p-2 box-border'>
-                  <p className='relative'>
+                <div
+                  key={e.$id}
+                  id={e.$id}
+                  className="bg-white rounded-lg p-2 box-border"
+                >
+                  <p className="relative">
                     {e.title}
-                    <button onClick={handleDel} className='absolute right-0'>Del</button>
+                    <button onClick={handleDel} className="absolute right-0 top-1">
+                      <MdDelete />
+                    </button>
                   </p>
                 </div>
               ))

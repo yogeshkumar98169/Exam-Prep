@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import service from "../appwrite/services";
 import config from "../appwrite/config";
+import { MdDelete } from "react-icons/md";
 
 export default function OneWord() {
   const [title, setTitle] = useState("");
@@ -67,8 +68,8 @@ export default function OneWord() {
                 >
                   <p className="relative">
                     {e.title}
-                    <button onClick={handleDel} className="absolute right-0">
-                      Del
+                    <button onClick={handleDel} className="absolute right-0 top-1">
+                      <MdDelete />
                     </button>
                   </p>
                 </div>

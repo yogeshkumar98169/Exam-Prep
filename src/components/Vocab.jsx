@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import service from "../appwrite/services";
 import config from "../appwrite/config";
+import { MdDelete } from "react-icons/md";
 
 export default function Vocab() {
   const [title, setTitle] = useState("");
@@ -37,9 +38,7 @@ export default function Vocab() {
   });
   return (
     <div className="flex flex-col gap-3">
-      <h1 className="text-2xl font-serif font-bold my-3 text-center">
-        Vocab
-      </h1>
+      <h1 className="text-2xl font-serif font-bold my-3 text-center">Vocab</h1>
       <main className="flex flex-col gap-3">
         <div className="flex flex-col gap-2">
           <input
@@ -67,8 +66,8 @@ export default function Vocab() {
                 >
                   <p className="relative">
                     {e.title}
-                    <button onClick={handleDel} className="absolute right-0">
-                      Del
+                    <button onClick={handleDel} className="absolute right-0 top-1">
+                      <MdDelete />
                     </button>
                   </p>
                 </div>
