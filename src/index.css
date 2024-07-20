@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bit{
+    color: rgb(179, 180, 182);
+}

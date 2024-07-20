@@ -1,0 +1,61 @@
+import config from './config.js';
+import { Client, ID, Databases, Storage} from "appwrite";
+
+export class Service {
+    client = new Client();
+    databases;
+    bucket;
+
+    constructor() {
+        this.client
+            .setEndpoint(config.appwriteUrl)
+            .setProject(config.appwriteProjectId);
+        this.databases = new Databases(this.client);
+        this.bucket = new Storage(this.client);
+    }
+
+    async createPost({ title,collectionid }) {
+        try {
+            return await this.databases.createDocument(
+                config.appwriteDatabaseId,
+                collectionid,
+                ID.unique(),
+                {
+                    title
+                }
+            )
+        } catch (error) {
+            console.log("Appwrite serive :: createPost :: error", error);
+        }
+    }
+
+    async deletePost({ id, collectionid }) {
+        try {
+            await this.databases.deleteDocument(
+                config.appwriteDatabaseId,
+                collectionid,
+                id
+            )
+            return true
+        } catch (error) {
+            console.log("Appwrite serive :: deletePost :: error", error);
+            return false
+        }
+    }
+
+    async getPosts({ collectionid }) {
+        try {
+            return await this.databases.listDocuments(
+                config.appwriteDatabaseId,
+                collectionid,
+            )
+        } catch (error) {
+            console.log("Appwrite serive :: getPosts :: error", error);
+            return false
+        }
+    }
+
+}
+
+const service = new Service()
+export default service
