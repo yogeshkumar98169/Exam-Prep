@@ -27,7 +27,7 @@ export default function OneWord() {
       e.target.parentElement.parentElement.parentElement.parentElement.getAttribute(
         "id"
       );
-    const delPost = await service.deletePost({ id, collectionid });
+      const delPost = await service.deletePost({ id, collectionid });
     console.log("Post Deleted");
     // console.log(delPost);
   };
