@@ -14,6 +14,9 @@ export default function Home() {
       <div className='bg-slate-400 w-[320px] h-36 rounded-lg flex justify-center items-center text-2xl text-red-950'>
         <Link to="/vocab">Vocab</Link>
       </div>
+      <div className='bg-slate-400 w-[320px] h-36 rounded-lg flex justify-center items-center text-2xl text-red-950'>
+        <Link to="/current">Current</Link>
+      </div>
     </div>
   )
 }
