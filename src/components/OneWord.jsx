@@ -11,7 +11,7 @@ export default function OneWord() {
 
   const handleChange = (e) => {
     setTitle(e.target.value);
-    console.log(title);
+    // console.log(title);
   };
 
   const handleClick = async () => {
@@ -28,8 +28,8 @@ export default function OneWord() {
         "id"
       );
       const delPost = await service.deletePost({ id, collectionid });
-    console.log("Post Deleted");
-    // console.log(delPost);
+      delPost ? console.log("Post deleted") : console.log("Error deleting post");    
+      // console.log(delPost);
   };
 
   const getAll = async () => {

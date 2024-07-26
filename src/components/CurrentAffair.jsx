@@ -13,7 +13,7 @@ export default function CurrentAffair() {
 
   const handleChange = (e) => {
     setTitle(e.target.value);
-    console.log(title);
+    // console.log(title);
   };
 
   const handleDescriptonChange=(e)=>{
@@ -29,7 +29,7 @@ export default function CurrentAffair() {
     setSend(false);
     const dbPost = await service.createPost({ title, collectionid,description });
     setSend(true);
-    console.log(dbPost);
+    // console.log(dbPost);
     setTitle(" ");
     setDescription(" ");
   };
@@ -40,7 +40,7 @@ export default function CurrentAffair() {
         "id"
       );
     const delPost = await service.deletePost({ id, collectionid });
-    console.log("Post Deleted");
+    delPost ? console.log("Post deleted") : console.log("Error deleting post");
     // console.log(delPost);
   };
 

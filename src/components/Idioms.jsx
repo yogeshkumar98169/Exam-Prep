@@ -11,7 +11,7 @@ export default function Idioms() {
 
   const handleChange = (e) => {
     setTitle(e.target.value);
-    console.log(title);
+    // console.log(title);
   };
 
   const handleClick = async() => {
@@ -25,7 +25,7 @@ export default function Idioms() {
   const handleDel=async(e)=>{
     const id=e.target.parentElement.parentElement.parentElement.parentElement.getAttribute("id")
     const delPost=await service.deletePost({id,collectionid})
-    console.log(delPost);
+    // console.log(delPost);
     delPost?console.log("Post deleted"):console.log("Error deleting post")
   }
 

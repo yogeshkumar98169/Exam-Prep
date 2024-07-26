@@ -11,7 +11,7 @@ export default function Vocab() {
 
   const handleChange = (e) => {
     setTitle(e.target.value);
-    console.log(title);
+    // console.log(title);
   };
 
   const handleClick = async () => {
@@ -28,7 +28,7 @@ export default function Vocab() {
         "id"
       );
     const delPost = await service.deletePost({ id, collectionid });
-    console.log("Post Deleted");
+    delPost ? console.log("Post deleted") : console.log("Error deleting post");
     // console.log(delPost);
   };
 
