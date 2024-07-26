@@ -90,7 +90,7 @@ export default function CurrentAffair() {
                   <div className="relative">
                     <div className="flex flex-col gap-3">
                       <p >Title : {e.title}</p>
-                      <p>Descriptoin : {e.description}</p>
+                      <p className="w-[250px]">Descriptoin : {e.description}</p>
                     </div>
                     <button
                       onClick={handleDel}
