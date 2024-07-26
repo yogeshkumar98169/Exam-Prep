@@ -54,7 +54,7 @@ export default function CurrentAffair() {
   return (
     <div className="flex flex-col gap-3">
       <h1 className="text-2xl font-serif font-bold my-3 text-center">
-        One Word
+        Current Affairs
       </h1>
       <main className="flex flex-col gap-3">
         <div className="flex flex-col gap-2">
