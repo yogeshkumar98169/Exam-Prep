@@ -1,12 +1,11 @@
 import { Outlet } from "react-router-dom"
-import Idioms from "./components/Idioms"
 
 function App() {
   
 
   return (
     <>
-    <div className="flex justify-center bg-[#9a9999] w-screen h-screen">
+    <div className="flex justify-center bg-[#9a9999] w-screen min-h-screen">
       <Outlet/>
     </div>
     </>
