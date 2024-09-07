@@ -36,6 +36,11 @@ export default function OneWord() {
     const post = await service.getPosts({ collectionid });
     setAllPosts(post.documents);
   };
+   const handleKeyDown = (event) => {
+     if (event.key === "Enter") {
+       handleClick();
+     }
+   };
   useEffect(() => {
     getAll();
   });
@@ -50,6 +55,7 @@ export default function OneWord() {
             type="text"
             onChange={handleChange}
             value={title}
+            onKeyDown={handleKeyDown}
             className="p-2 outline-none rounded-lg w-72 max-w-72"
           />
           <button
@@ -61,7 +67,7 @@ export default function OneWord() {
           </button>
         </div>
 
-        <div className="bg-[#6c6b6b] flex flex-col gap-3 p-2 rounded-sm">
+        <div className="bg-[#6c6b6b] flex flex-col gap-3 p-2 rounded-sm overflow-y-scroll h-[500px]">
           {allPosts
             ? allPosts.map((e) => (
                 <div
@@ -71,7 +77,10 @@ export default function OneWord() {
                 >
                   <p className="relative">
                     {e.title}
-                    <button onClick={handleDel} className="absolute right-0 top-1">
+                    <button
+                      onClick={handleDel}
+                      className="absolute right-0 top-1"
+                    >
                       <MdDelete />
                     </button>
                   </p>

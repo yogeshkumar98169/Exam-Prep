@@ -48,6 +48,11 @@ export default function CurrentAffair() {
     const post = await service.getPosts({ collectionid });
     setAllPosts(post.documents);
   };
+   const handleKeyDown = (event) => {
+     if (event.key === "Enter") {
+       handleClick();
+     }
+   };
   useEffect(() => {
     getAll();
   });
@@ -63,6 +68,7 @@ export default function CurrentAffair() {
             type="text"
             onChange={handleChange}
             value={title}
+            onKeyDown={handleKeyDown}
             className="p-2 outline-none rounded-lg w-72 max-w-72"
           />
           <textarea
@@ -79,7 +85,7 @@ export default function CurrentAffair() {
           </button>
         </div>
 
-        <div className="bg-[#6c6b6b] flex flex-col gap-3 p-2 rounded-sm">
+        <div className="bg-[#6c6b6b] flex flex-col gap-3 p-2 rounded-sm overflow-y-scroll h-[500px]">
           {allPosts
             ? allPosts.map((e) => (
                 <div
@@ -89,7 +95,7 @@ export default function CurrentAffair() {
                 >
                   <div className="relative">
                     <div className="flex flex-col gap-3">
-                      <p >Title : {e.title}</p>
+                      <p>Title : {e.title}</p>
                       <p className="w-[250px]">Descriptoin : {e.description}</p>
                     </div>
                     <button
