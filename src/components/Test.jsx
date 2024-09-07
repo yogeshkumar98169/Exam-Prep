@@ -52,7 +52,7 @@ export default function Test() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen w-full bg-gray-50 p-6">
+    <div className="flex justify-center items-center min-h-screen w-full bg-black p-6">
       <div className="w-full max-w-lg bg-white shadow-xl rounded-lg overflow-hidden border border-gray-200">
         <div className="p-6 bg-blue-100">
           <label
@@ -75,10 +75,10 @@ export default function Test() {
             <option value={onewordid}>One Word</option>
           </select>
         </div>
-        <div className="p-6 bg-gray-50">
+        <div className="p-6 bg-black">
           {allPosts.length > 0 ? (
-            <div className="bg-white rounded-lg shadow-md p-4 border border-gray-200">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+            <div className="bg-black  rounded-lg shadow-md p-4 border border-gray-200">
+              <h2 className="text-2xl font-semibold text-gray-200 mb-2">
                 {allPosts[currentIndex]?.title}
               </h2>
               <p className="text-gray-600">{allPosts[currentIndex]?.body}</p>
