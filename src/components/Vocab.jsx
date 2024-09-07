@@ -67,7 +67,7 @@ export default function Vocab() {
           </button>
         </div>
 
-        <div className="bg-[#6c6b6b] flex flex-col gap-3 p-2 rounded-sm overflow-y-scroll h-60">
+        <div className="bg-[#6c6b6b] flex flex-col gap-3 p-2 rounded-sm overflow-y-scroll h-[500px]">
           {allPosts
             ? allPosts.map((e) => (
                 <div
