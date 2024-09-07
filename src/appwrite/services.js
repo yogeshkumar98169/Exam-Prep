@@ -1,5 +1,5 @@
 import config from './config.js';
-import { Client, ID, Databases, Storage} from "appwrite";
+import { Client, ID, Databases, Storage, Query} from "appwrite";
 
 export class Service {
     client = new Client();
@@ -49,6 +49,9 @@ export class Service {
             return await this.databases.listDocuments(
                 config.appwriteDatabaseId,
                 collectionid,
+                [
+                    Query.limit(100)
+                ]
             )
         } catch (error) {
             console.log("Appwrite serive :: getPosts :: error", error);

@@ -34,10 +34,17 @@ export default function Vocab() {
 
   const getAll = async () => {
     const post = await service.getPosts({ collectionid });
+    console.log(post)
     setAllPosts(post.documents);
+  };
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+     handleClick();
+    }
   };
   useEffect(() => {
     getAll();
+    
   });
   return (
     <div className="flex flex-col gap-3">
@@ -48,6 +55,7 @@ export default function Vocab() {
             type="text"
             onChange={handleChange}
             value={title}
+            onKeyDown={handleKeyDown}
             className="p-2 outline-none rounded-lg w-72 max-w-72"
           />
           <button
@@ -59,7 +67,7 @@ export default function Vocab() {
           </button>
         </div>
 
-        <div className="bg-[#6c6b6b] flex flex-col gap-3 p-2 rounded-sm">
+        <div className="bg-[#6c6b6b] flex flex-col gap-3 p-2 rounded-sm overflow-y-scroll h-60">
           {allPosts
             ? allPosts.map((e) => (
                 <div
@@ -69,7 +77,10 @@ export default function Vocab() {
                 >
                   <p className="relative">
                     {e.title}
-                    <button onClick={handleDel} className="absolute right-0 top-1">
+                    <button
+                      onClick={handleDel}
+                      className="absolute right-0 top-1"
+                    >
                       <MdDelete />
                     </button>
                   </p>
