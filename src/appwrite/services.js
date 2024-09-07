@@ -43,6 +43,20 @@ export class Service {
             return false
         }
     }
+    async updatePost(id,{title,collectionid}) {
+        try {
+            return await this.databases.updateDocument(
+                config.appwriteDatabaseId,
+                collectionid,
+               id,
+                {
+                    title
+                }
+            )
+        } catch (error) {
+            console.log("Appwrite serive :: updatePost :: error", error);
+        }
+    }
 
     async getPosts({ collectionid }) {
         try {
