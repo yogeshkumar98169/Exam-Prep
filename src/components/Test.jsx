@@ -18,15 +18,13 @@ export default function Test() {
   };
 
   const handleDel = (id) => {
-    // Implement delete functionality here
     console.log("Delete post with id:", id);
-    // Example: service.deletePost(id).then(() => getAll());
   };
 
   const getAll = async () => {
     try {
       const post = await service.getPosts({ collectionid });
-      setAllPosts(post.documents); // Ensure it's an array
+      setAllPosts(post.documents);
       console.log(post.documents.length);
     } catch (error) {
       console.error("Failed to fetch posts:", error);
@@ -52,12 +50,12 @@ export default function Test() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen w-full bg-black p-6">
-      <div className="w-full max-w-lg bg-white shadow-xl rounded-lg overflow-hidden border border-gray-200">
-        <div className="p-6 bg-blue-100">
+    <div className="flex justify-center items-center min-h-screen w-full bg-gray-900 p-6">
+      <div className="w-full max-w-lg bg-gray-800 shadow-lg rounded-lg overflow-hidden border border-gray-700">
+        <div className="p-6 bg-gray-800">
           <label
             htmlFor="options"
-            className="block text-blue-800 text-lg font-semibold mb-4"
+            className="block text-gray-300 text-lg font-medium mb-4"
           >
             Select an Option:
           </label>
@@ -66,7 +64,7 @@ export default function Test() {
             id="collectionid"
             onChange={handleChange}
             value={collectionid}
-            className="block w-full px-4 py-2 border border-blue-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="block w-full px-4 py-2 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-700 text-gray-300"
           >
             <option value="">Select</option>
             <option value={vocabid}>Vocab</option>
@@ -75,30 +73,30 @@ export default function Test() {
             <option value={onewordid}>One Word</option>
           </select>
         </div>
-        <div className="p-6 bg-black">
+        <div className="p-6 bg-gray-900">
           {allPosts.length > 0 ? (
-            <div className="bg-black  rounded-lg shadow-md p-4 border border-gray-200">
-              <h2 className="text-2xl font-semibold text-gray-200 mb-2">
+            <div className="bg-gray-800 rounded-lg shadow-md p-4 border border-gray-700">
+              <h2 className="text-2xl font-semibold text-gray-100 mb-2">
                 {allPosts[currentIndex]?.title}
               </h2>
-              <p className="text-gray-600">{allPosts[currentIndex]?.body}</p>
+              <p className="text-gray-400">{allPosts[currentIndex]?.body}</p>
             </div>
           ) : (
-            <p className="text-gray-600">No posts available.</p>
+            <p className="text-gray-400 text-center">No posts available.</p>
           )}
         </div>
-        <div className="flex justify-between p-6 bg-blue-100 border-t border-blue-300">
+        <div className="flex justify-between p-6 bg-gray-800 border-t border-gray-700">
           <button
             onClick={handlePrev}
             disabled={currentIndex === 0}
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 disabled:bg-blue-300 transition-colors duration-200"
+            className="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600 disabled:bg-gray-600 transition-colors duration-200"
           >
             Prev
           </button>
           <button
             onClick={handleNext}
             disabled={currentIndex === allPosts.length - 1}
-            className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 disabled:bg-green-300 transition-colors duration-200"
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-500 disabled:bg-blue-500 transition-colors duration-200"
           >
             Next
           </button>
