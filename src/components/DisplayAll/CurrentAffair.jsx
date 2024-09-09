@@ -7,11 +7,9 @@ export default function CurrentAffiarAll() {
   const [allPosts, setAllPosts] = useState(null);
   const collectionid = config.appwriteCollectionIdCurrent;
 
-  const handleDel = async (e) => {
-    const id =
-      e.target.parentElement.parentElement.parentElement.parentElement.getAttribute(
-        "id"
-      );
+  const handleDel = async (id) => {
+    console.log(id)
+    
     const delPost = await service.deletePost({ id, collectionid });
     delPost ? console.log("Post deleted") : console.log("Error deleting post");
     // console.log(delPost);
