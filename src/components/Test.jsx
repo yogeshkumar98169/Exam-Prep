@@ -75,11 +75,14 @@ export default function Test() {
         </div>
         <div className="p-6 bg-gray-900">
           {allPosts.length > 0 ? (
-            <div className="bg-gray-800 rounded-lg shadow-md p-4 border border-gray-700">
-              <h2 className="text-2xl font-semibold text-gray-100 mb-2">
-                {allPosts[currentIndex]?.title}
-              </h2>
-              <p className="text-gray-400">{allPosts[currentIndex]?.body}</p>
+            <div>
+              <div className="text-gray-100 pb-2">Total : {allPosts.length}</div>
+              <div className="bg-gray-800 rounded-lg shadow-md p-4 border border-gray-700">
+                <h2 className="text-2xl font-semibold text-gray-100 mb-2">
+                  {allPosts[currentIndex]?.title}
+                </h2>
+                <p className="text-gray-400">{allPosts[currentIndex]?.body}</p>
+              </div>
             </div>
           ) : (
             <p className="text-gray-400 text-center">No posts available.</p>
