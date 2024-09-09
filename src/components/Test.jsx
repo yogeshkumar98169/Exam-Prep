@@ -17,10 +17,6 @@ export default function Test() {
     setCurrentIndex(0); // Reset index when collection changes
   };
 
-  const handleDel = (id) => {
-    console.log("Delete post with id:", id);
-  };
-
   const getAll = async () => {
     try {
       const post = await service.getPosts({ collectionid });

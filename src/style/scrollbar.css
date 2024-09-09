@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .scrollbar-custom::-webkit-scrollbar {
+        @apply w-2;
+    }
+
+    .scrollbar-custom::-webkit-scrollbar-track {
+        @apply bg-gray-800 rounded-lg;
+    }
+
+    .scrollbar-custom::-webkit-scrollbar-thumb {
+        @apply bg-gray-600 rounded-lg border-2 border-gray-800;
+    }
+}

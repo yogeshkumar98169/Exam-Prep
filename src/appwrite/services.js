@@ -43,14 +43,15 @@ export class Service {
             return false
         }
     }
-    async updatePost(id,{title,collectionid}) {
+    async updatePost(id,{title,collectionid,description}) {
         try {
             return await this.databases.updateDocument(
                 config.appwriteDatabaseId,
                 collectionid,
                id,
                 {
-                    title
+                    title,
+                    description
                 }
             )
         } catch (error) {
