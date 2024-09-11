@@ -31,7 +31,7 @@ export default function MultiCollection() {
   };
 
   const handleClick = async () => {
-    if (!title.trim()) return; // Prevent empty title submission, description is optional
+    if (!title.trim()|| !collectionid) return; // Prevent empty title submission, description is optional
     setSend(false);
     try {
       await service.createPost({ title, description, collectionid });
@@ -84,14 +84,14 @@ export default function MultiCollection() {
   };
 
   const getAll = async () => {
-    try {
-      const post = await service.getPosts({ collectionid });
-      setAllPosts(post.documents);
-      console.log(post);
-    } catch (error) {
-      console.error("Failed to fetch posts:", error);
-    }
-  };
+  try {
+    const post = await service.getPosts({ collectionid });
+    setAllPosts(post.documents);
+  } catch (error) {
+    toast.error("Failed to fetch posts.");
+    console.error("Failed to fetch posts:", error);
+  }
+};
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
@@ -170,7 +170,7 @@ export default function MultiCollection() {
         <button
           onClick={handleClick}
           className="bg-blue-700 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-800 disabled:bg-gray-600 transition-colors duration-300"
-          disabled={!send}
+          disabled={!send|| title.trim() ||!collectionid}
         >
           {send ? "Save" : "Saving..."}
         </button>
