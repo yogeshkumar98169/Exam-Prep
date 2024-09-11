@@ -170,13 +170,14 @@ export default function MultiCollection() {
         <button
           onClick={handleClick}
           className="bg-blue-700 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-800 disabled:bg-gray-600 transition-colors duration-300"
-          disabled={!send|| title.trim() ||!collectionid}
+          disabled={!send || title.trim() || !collectionid}
         >
           {send ? "Save" : "Saving..."}
         </button>
       </div>
 
       <div className="bg-gray-800 p-4 rounded-lg shadow-md overflow-y-auto h-[500px] scrollbar-custom">
+        <div className="text-gray-100 pb-2">Total : {allPosts.length}</div>
         {allPosts.length > 0 ? (
           allPosts.map((post) => (
             <div
@@ -226,13 +227,13 @@ export default function MultiCollection() {
                     >
                       <MdEdit className="w-5 h-5" />
                     </button>
-                    <button
+                    {/* <button
                       onClick={() => handleDel(post.$id)}
                       className="text-red-400 hover:text-red-500 transition-colors duration-300"
                       aria-label="Delete"
                     >
                       <MdDelete className="w-5 h-5" />
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               )}

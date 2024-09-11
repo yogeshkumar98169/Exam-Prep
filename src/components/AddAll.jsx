@@ -64,7 +64,8 @@ export default function MultiCollection() {
       getAll();
     }
   }, [collectionid]);
-  const sampleDataArray = [ ];
+  const sampleDataArray = [
+  ]; 
 
   useEffect(() => {
     setDataArray(sampleDataArray); // Set the array once you have the data
@@ -105,6 +106,7 @@ export default function MultiCollection() {
 
       {/* Display posts */}
       <div className="bg-gray-800 p-4 rounded-lg shadow-md overflow-y-auto h-[500px] scrollbar-custom">
+        <div className="text-gray-100 pb-2">Total : {allPosts.length}</div>
         {allPosts.length > 0 ? (
           allPosts.map((post) => (
             <div

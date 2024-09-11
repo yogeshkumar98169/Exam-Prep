@@ -65,7 +65,7 @@ export class Service {
                 config.appwriteDatabaseId,
                 collectionid,
                 [
-                    Query.limit(100)
+                    Query.limit(600)
                 ]
             )
         } catch (error) {
