@@ -22,6 +22,7 @@ export default function Test() {
       const post = await service.getPosts({ collectionid });
       setAllPosts(post.documents);
       console.log(post.documents.length);
+      console.log(post.documents)
     } catch (error) {
       console.error("Failed to fetch posts:", error);
     }
@@ -72,7 +73,9 @@ export default function Test() {
         <div className="p-6 bg-gray-900">
           {allPosts.length > 0 ? (
             <div>
-              <div className="text-gray-100 pb-2">Total : {allPosts.length}</div>
+              <div className="text-gray-100 pb-2 flex flex-row justify-between">Total : {allPosts.length}
+                <span> Current : {currentIndex+1}</span>
+              </div>
               <div className="bg-gray-800 rounded-lg shadow-md p-4 border border-gray-700">
                 <h2 className="text-2xl font-semibold text-gray-100 mb-2">
                   {allPosts[currentIndex]?.title}
