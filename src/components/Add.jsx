@@ -170,7 +170,7 @@ export default function MultiCollection() {
         <button
           onClick={handleClick}
           className="bg-blue-700 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-800 disabled:bg-gray-600 transition-colors duration-300"
-          disabled={!send || title.trim() || !collectionid}
+          disabled={!send || !title.trim() || !collectionid}
         >
           {send ? "Save" : "Saving..."}
         </button>
