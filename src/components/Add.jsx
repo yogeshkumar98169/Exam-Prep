@@ -139,7 +139,7 @@ export default function MultiCollection() {
   return (
     <div className="flex flex-col gap-6 py-1 px-8 w-[400px] mx-auto bg-gray-900 text-gray-100 rounded-lg shadow-lg h-full">
       <ToastContainer />
-      <h1 className="text-xl font-semibold text-center text-gray-100">
+      <h1 className="text-4xl font-semibold text-center text-gray-100">
         {heading}
       </h1>
 
