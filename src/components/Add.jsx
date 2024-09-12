@@ -15,7 +15,8 @@ export default function MultiCollection() {
   const [editPostId, setEditPostId] = useState(null);
   const [editTitle, setEditTitle] = useState("");
   const [editDescription, setEditDescription] = useState("");
-  const [heading, setHeading] = useState("Multi-Collection"); // State for the heading
+  const [heading, setHeading] = useState("Multi-Collection");
+  const [searchTerm, setSearchTerm] = useState(""); // New state for search term
 
   const currentid = config.appwriteCollectionIdCurrent;
   const idiomsid = config.appwriteCollectionIdIdioms;
@@ -31,13 +32,13 @@ export default function MultiCollection() {
   };
 
   const handleClick = async () => {
-    if (!title.trim()|| !collectionid) return; // Prevent empty title submission, description is optional
+    if (!title.trim() || !collectionid) return;
     setSend(false);
     try {
       await service.createPost({ title, description, collectionid });
       setTitle("");
       setDescription("");
-      getAll(); // Refresh the list
+      getAll();
       toast.success("Post created successfully!");
     } catch (error) {
       console.error("Error creating post:", error);
@@ -50,7 +51,7 @@ export default function MultiCollection() {
   const handleDel = async (id) => {
     try {
       await service.deletePost({ id, collectionid });
-      getAll(); // Refresh the list after deletion
+      getAll();
       toast.success("Post deleted successfully!");
     } catch (error) {
       console.error("Error deleting post:", error);
@@ -65,7 +66,7 @@ export default function MultiCollection() {
   };
 
   const handleUpdate = async () => {
-    if (!editTitle.trim()) return; // Prevent empty title update, description is optional
+    if (!editTitle.trim()) return;
     try {
       await service.updatePost(editPostId, {
         title: editTitle,
@@ -75,7 +76,7 @@ export default function MultiCollection() {
       setEditPostId(null);
       setEditTitle("");
       setEditDescription("");
-      getAll(); // Refresh the list after update
+      getAll();
       toast.success("Post updated successfully!");
     } catch (error) {
       console.error("Error updating post:", error);
@@ -84,14 +85,14 @@ export default function MultiCollection() {
   };
 
   const getAll = async () => {
-  try {
-    const post = await service.getPosts({ collectionid });
-    setAllPosts(post.documents);
-  } catch (error) {
-    toast.error("Failed to fetch posts.");
-    console.error("Failed to fetch posts:", error);
-  }
-};
+    try {
+      const post = await service.getPosts({ collectionid });
+      setAllPosts(post.documents);
+    } catch (error) {
+      toast.error("Failed to fetch posts.");
+      console.error("Failed to fetch posts:", error);
+    }
+  };
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
@@ -111,7 +112,6 @@ export default function MultiCollection() {
       getAll();
     }
 
-    // Update heading based on selected collection
     switch (collectionid) {
       case vocabid:
         setHeading("Vocabulary");
@@ -130,13 +130,28 @@ export default function MultiCollection() {
     }
   }, [collectionid]);
 
+  const filteredPosts = allPosts.filter(
+    (post) =>
+      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.description.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div className="flex flex-col gap-6 p-8 w-[400px] mt-2 mx-auto bg-gray-900 text-gray-100 rounded-lg shadow-lg h-full">
+    <div className="flex flex-col gap-6 py-1 px-8 w-[400px] mx-auto bg-gray-900 text-gray-100 rounded-lg shadow-lg h-full">
       <ToastContainer />
-      <h1 className="text-4xl font-semibold text-center text-gray-100">
+      <h1 className="text-xl font-semibold text-center text-gray-100">
         {heading}
       </h1>
+
       <div className="flex flex-col gap-4">
+        {/* Search Input Field */}
+        <input
+          type="text"
+          onChange={(e) => setSearchTerm(e.target.value)}
+          value={searchTerm}
+          className="p-4 border border-gray-700 bg-gray-800 text-gray-100 rounded-lg w-full max-w-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+          placeholder="Search posts..."
+        />
         <select
           name="collectionid"
           id="collectionid"
@@ -177,9 +192,9 @@ export default function MultiCollection() {
       </div>
 
       <div className="bg-gray-800 p-4 rounded-lg shadow-md overflow-y-auto h-[500px] scrollbar-custom">
-        <div className="text-gray-100 pb-2">Total : {allPosts.length}</div>
-        {allPosts.length > 0 ? (
-          allPosts.map((post) => (
+        <div className="text-gray-100 pb-2">Total : {filteredPosts.length}</div>
+        {filteredPosts.length > 0 ? (
+          filteredPosts.map((post) => (
             <div
               key={post.$id}
               className="bg-gray-700 rounded-lg p-4 shadow-sm mb-4 relative"
