@@ -130,14 +130,24 @@ export default function MultiCollection() {
     }
   }, [collectionid]);
 
+  // Function to highlight the search term
+  const highlightText = (text) => {
+    if(!text) return "";
+    if (!searchTerm.trim()) return text;
+
+    const regex = new RegExp(`(${searchTerm})`, "gi");
+    return text.replace(regex, "<mark>$1</mark>");
+  };
+
   const filteredPosts = allPosts.filter(
     (post) =>
-      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      post.description.toLowerCase().includes(searchTerm.toLowerCase())
+      post.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.description?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+
   return (
-    <div className="flex flex-col gap-6 py-1 px-8 w-[400px] mx-auto bg-gray-900 text-gray-100 rounded-lg shadow-lg h-full">
+    <div className="flex flex-col gap-6 p-8 w-[400px] mt-2 mx-auto bg-gray-900 text-gray-100 rounded-lg shadow-lg h-full">
       <ToastContainer />
       <h1 className="text-4xl font-semibold text-center text-gray-100">
         {heading}
@@ -223,12 +233,18 @@ export default function MultiCollection() {
                 </div>
               ) : (
                 <div>
-                  <h3 className="text-lg font-bold text-gray-100">
-                    {post.title}
-                  </h3>
-                  <pre className="text-gray-400 whitespace-pre-wrap">
-                    {post.description}
-                  </pre>
+                  <h3
+                    className="text-lg font-bold text-gray-100"
+                    dangerouslySetInnerHTML={{
+                      __html: highlightText(post.title),
+                    }}
+                  />
+                  <pre
+                    className="text-gray-400 whitespace-pre-wrap"
+                    dangerouslySetInnerHTML={{
+                      __html: highlightText(post.description),
+                    }}
+                  />
                   <p className="text-gray-500 text-sm">
                     Last updated: {new Date(post.$updatedAt).toLocaleString()}
                   </p>
