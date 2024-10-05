@@ -18,18 +18,33 @@ export default function MultiCollection() {
     setSend(false); // Disable the button while processing
 
     try {
-      // Use Promise.all to add all elements concurrently
-      const promises = dataArray.map((data) =>
-        service.createPost({
-          title: data.title, // Assuming your array has title and description
-          description: "",
+      // Loop through the dataArray and insert each post after checking if it exists
+      for (let data of dataArray) {
+        // Check if a post with the same title already exists in the collection
+        const existingPosts = await service.getPosts({
           collectionid,
-        })
-      );
+        });
 
-      await Promise.all(promises); // Wait for all requests to complete
-      toast.success("All posts created successfully!");
+        const exists = existingPosts.documents.some(
+          (post) => post.title.toLowerCase() === data.title.toLowerCase()
+        );
 
+        if (exists) {
+          console.log(
+            `Post titled "${data.title}" already exists. Skipping...`
+          );
+          continue; // Skip to the next item if the title exists
+        }
+
+        // If the title doesn't exist, create the post
+        await service.createPost({
+          title: data.title, // Assuming your array has title and description
+          description: data.description || "",
+          collectionid,
+        });
+      }
+
+      toast.success("Posts created successfully, duplicates skipped.");
       // Optionally refresh the list after posting
       getAll();
     } catch (error) {
@@ -39,6 +54,7 @@ export default function MultiCollection() {
       setSend(true); // Re-enable the button after completion
     }
   };
+
 
   const handleChangeCollection = (e) => {
     setCollectionid(e.target.value);
@@ -65,6 +81,7 @@ export default function MultiCollection() {
     }
   }, [collectionid]);
   const sampleDataArray = [
+  
   ]; 
 
   useEffect(() => {
@@ -92,6 +109,7 @@ export default function MultiCollection() {
             Current Affairs
           </option>
           <option value={config.appwriteCollectionIdIdioms}>Idioms</option>
+          <option value={config.appwriteCollectionIdIdioms2500}>Idioms 2500</option>
           <option value={config.appwriteCollectionIdOneWord}>One Word</option>
         </select>
 

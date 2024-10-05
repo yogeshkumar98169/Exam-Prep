@@ -8,6 +8,7 @@ export default function Test() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const currentid = config.appwriteCollectionIdCurrent;
   const idiomsid = config.appwriteCollectionIdIdioms;
+  const idioms2500id=config.appwriteCollectionIdIdioms2500
   const onewordid = config.appwriteCollectionIdOneWord;
   const vocabid = config.appwriteCollectionIdVocab;
 
@@ -67,6 +68,7 @@ export default function Test() {
             <option value={vocabid}>Vocab</option>
             <option value={currentid}>Current Affairs</option>
             <option value={idiomsid}>Idioms</option>
+            <option value={idioms2500id}>Idioms 2500</option>
             <option value={onewordid}>One Word</option>
           </select>
         </div>

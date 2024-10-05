@@ -20,6 +20,7 @@ export default function MultiCollection() {
 
   const currentid = config.appwriteCollectionIdCurrent;
   const idiomsid = config.appwriteCollectionIdIdioms;
+  const idioms2500id=config.appwriteCollectionIdIdioms2500
   const onewordid = config.appwriteCollectionIdOneWord;
   const vocabid = config.appwriteCollectionIdVocab;
 
@@ -122,6 +123,8 @@ export default function MultiCollection() {
       case idiomsid:
         setHeading("Idioms");
         break;
+      case idioms2500id:
+        setHeading("Idioms 2500")
       case onewordid:
         setHeading("One Word");
         break;
@@ -173,6 +176,7 @@ export default function MultiCollection() {
           <option value={vocabid}>Vocab</option>
           <option value={currentid}>Current Affairs</option>
           <option value={idiomsid}>Idioms</option>
+          <option value={idioms2500id}>Idioms 2500</option>
           <option value={onewordid}>One Word</option>
         </select>
 
