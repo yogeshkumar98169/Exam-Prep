@@ -6,6 +6,7 @@ export default function Test() {
   const [collectionid, setCollectionid] = useState("");
   const [allPosts, setAllPosts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [automatic, setAutomatic]=useState(false)
   const currentid = config.appwriteCollectionIdCurrent;
   const idiomsid = config.appwriteCollectionIdIdioms;
   const idioms2500id=config.appwriteCollectionIdIdioms2500
@@ -16,6 +17,14 @@ export default function Test() {
     const selectedValue = e.target.value;
     setCollectionid(selectedValue);
     setCurrentIndex(0); // Reset index when collection changes
+  };
+  
+  const handleIndexChange=(e)=>{
+    const selectedValue=Number(e.target.value);
+    setCurrentIndex(selectedValue)
+  }
+  const handleCheckboxChange = (event) => {
+    setAutomatic(event.target.checked);
   };
 
   const getAll = async () => {
@@ -36,10 +45,25 @@ export default function Test() {
   }, [collectionid]);
 
   const handleNext = () => {
+    
     if (currentIndex < allPosts.length - 1) {
       setCurrentIndex(currentIndex + 1);
     }
+
   };
+  useEffect(() => {
+    let intervalId;
+
+    if (automatic) {
+      // Set up the interval when automatic is true
+      intervalId = setInterval(() => {
+        handleNext();
+      }, 1000); // interval in milliseconds
+
+      // Clear the interval when the component is unmounted or when automatic changes
+      return () => clearInterval(intervalId);
+    }
+  }, [automatic, currentIndex, 2000]); 
 
   const handlePrev = () => {
     if (currentIndex > 0) {
@@ -75,8 +99,22 @@ export default function Test() {
         <div className="p-6 bg-gray-900">
           {allPosts.length > 0 ? (
             <div>
-              <div className="text-gray-100 pb-2 flex flex-row justify-between">Total : {allPosts.length}
-                <span> Current : {currentIndex+1}</span>
+              <input
+                className="ppearance-none checked:bg-blue-600 w-6 h-6 border-2 border-gray-400 rounded-md mr-2 cursor-pointer"
+                type="checkbox"
+                checked={automatic}
+                onChange={handleCheckboxChange}
+              />
+              <div className="text-gray-100 pb-2 flex flex-row justify-between">
+                Total : {allPosts.length}
+                <span>
+                  <input
+                    type="number"
+                    className="w-14 text-black text-xl"
+                    onInputCapture={handleIndexChange}
+                  />
+                </span>
+                <span> Current : {currentIndex + 1}</span>
               </div>
               <div className="bg-gray-800 rounded-lg shadow-md p-4 border border-gray-700">
                 <h2 className="text-2xl font-semibold text-gray-100 mb-2">
