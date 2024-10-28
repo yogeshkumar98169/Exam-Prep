@@ -18,9 +18,10 @@ const FileUpload = () => {
   const fetchPosts = async () => {
     try {
       const data = await service.getPosts({ collectionid: currentid });
-      setPosts(data.documents);
+      setPosts(data.documents || []); // Ensure it's an array
     } catch (error) {
       console.error("Error fetching posts:", error);
+      setPosts([]); // Reset posts in case of error
     }
   };
 
@@ -68,12 +69,12 @@ const FileUpload = () => {
   };
 
   const handleNext = () => {
-    setCurrentPostIndex((prevIndex) => (prevIndex + 1) % posts.length);
+    setCurrentPostIndex((prevIndex) => (prevIndex + 1) % (posts.length || 1)); // Prevent division by zero
   };
 
   const handlePrev = () => {
     setCurrentPostIndex(
-      (prevIndex) => (prevIndex - 1 + posts.length) % posts.length
+      (prevIndex) => (prevIndex - 1 + (posts.length || 1)) % (posts.length || 1)
     );
   };
 
@@ -81,8 +82,7 @@ const FileUpload = () => {
     setIsFullscreen(!isFullscreen);
   };
 
-  // Only set currentPost if there are posts available
-  const currentPost = posts[currentPostIndex] || {};
+  const currentPost = posts[currentPostIndex] || {}; // Default to an empty object
 
   return (
     <div className="container mx-auto p-4">
@@ -131,7 +131,7 @@ const FileUpload = () => {
           <img
             src={URL.createObjectURL(image)}
             alt="Current Upload Preview"
-            className="mt-2 w-full h-full "
+            className="mt-2 w-full h-full"
           />
         </div>
       )}
@@ -140,7 +140,6 @@ const FileUpload = () => {
       <div className="flex flex-col items-center">
         <h3 className="text-xl font-semibold mb-4">Uploaded Files</h3>
         <div className="w-full max-w-md bg-white shadow-md rounded-lg p-6">
-          {/* Check if currentPost has a title before rendering */}
           {currentPost.title ? (
             <>
               <h4 className="text-lg font-medium">{currentPost.title}</h4>
@@ -177,7 +176,7 @@ const FileUpload = () => {
               </div>
             </>
           ) : (
-            <p className="text-gray-500">No posts available.</p> // Fallback when no posts are available
+            <p className="text-gray-500">No posts available.</p>
           )}
         </div>
       </div>
