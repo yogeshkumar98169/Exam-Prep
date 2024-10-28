@@ -30,6 +30,14 @@ export default function Home() {
             Add All Posts
           </span>
         </Link>
+        <Link
+          to="/file-upload"
+          className="group bg-gray-800 p-6 rounded-lg shadow-lg flex justify-center items-center transition-transform transform hover:scale-105"
+        >
+          <span className="text-xl font-semibold text-gray-100 group-hover:text-blue-400">
+            Images
+          </span>
+        </Link>
       </div>
     </div>
   );

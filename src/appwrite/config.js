@@ -7,6 +7,8 @@ const config = {
     appwriteCollectionIdOneWord: String(import.meta.env.VITE_APPWRITE_COLLECTION_ID_ONEWORD),
     appwriteCollectionIdVocab: String(import.meta.env.VITE_APPWRITE_COLLECTION_ID_VOCAB),
     appwriteCollectionIdCurrent: String(import.meta.env.VITE_APPWRITE_COLLECTION_ID_CURRENT),
+    appwriteCollectionIdImages: String(import.meta.env.VITE_APPWRITE_COLLECTION_ID_Images),
+    appwriteBucketId: String(import.meta.env.VITE_APPWRITE_BUCKET_ID)
 }
 
 

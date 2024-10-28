@@ -4,6 +4,8 @@ import App from "../App.jsx";
 import Test from "../components/Test.jsx"
 import Add from "../components/Add.jsx"
 import AddAll from "../components/AddAll.jsx"
+import ImageUpload from "../components/ImageUpload.jsx";
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
@@ -11,6 +13,7 @@ const router = createBrowserRouter(
       <Route path="test" element={<Test />}></Route>
       <Route path="add" element={<Add />}></Route>
       <Route path="add-all" element={<AddAll />}></Route>
+      <Route path="file-upload" element={<ImageUpload/>}></Route>
     </Route>
   )
 );
